@@ -1,5 +1,7 @@
 # Headless Ubuntu/Xfce containers with VNC/noVNC and configurable Firefox
 
+## accetto/ubuntu-vnc-xfce-firefox-plus
+
 This repository contains resources for building Docker images based on [Ubuntu][docker-ubuntu], with [Xfce][xfce] desktops, headless **VNC**/[noVNC][novnc] environments and the current [Firefox][firefox] web browser with pre-configuration support.
 
 These images can be also successfully built and used on NAS devices. They
@@ -27,7 +29,7 @@ The images are regularly maintained and rebuilt. The history of notable changes 
 
 *Remark:* Resources for building images with default Firefox installation without configuration support can be found in the separate repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
 
-## Image set
+### Image set
 
 - [accetto/ubuntu-vnc-xfce-firefox-plus][this-docker]
 
