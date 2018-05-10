@@ -164,7 +164,6 @@ If you do not find a solution, you can file a new issue. The better you describe
 [accetto-docker-ubuntu-vnc-xfce]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce/
 
 [accetto-github-ubuntu-vnc-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-firefox/
-[accetto-docker-ubuntu-vnc-xfce-firefox]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox/
 
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
