@@ -2,7 +2,13 @@
 
 ## accetto/ubuntu-vnc-xfce-firefox-plus
 
-[Docker Hub][this-docker] - [Git Hub][this-github]
+[Docker Hub][this-docker] - [Git Hub][this-github] - [Wiki][this-wiki]
+
+***
+
+### Version 18.05.1
+
+- Firefox Quantum updated to version **60.0** (64-bit)
 
 ### Version 18.05
 
@@ -15,5 +21,7 @@
 
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-plus/
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
+[this-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki
+
 [accetto-github-ubuntu-vnc-xfce]: https://github.com/accetto/ubuntu-vnc-xfce
 [accetto-github-ubuntu-vnc-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-firefox

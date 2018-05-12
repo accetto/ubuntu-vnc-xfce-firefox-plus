@@ -2,9 +2,13 @@
 
 ## accetto/ubuntu-vnc-xfce-firefox-plus
 
-[Docker Hub][this-docker] - [Git Hub][this-github]
+[Docker Hub][this-docker] - [Git Hub][this-github] - [Changelog][this-changelog] - [Wiki][this-wiki]
 
-This repository contains resources for building Docker images based on [Ubuntu][docker-ubuntu], with [Xfce][xfce] desktops, headless **VNC**/[noVNC][novnc] environments and the current [Firefox][firefox] web browser with pre-configuration support.
+**Attention:** Resources for building images with default Firefox installation without configuration support can be found in its own GitHub repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
+
+***
+
+**This repository** contains resources for building Docker images based on [Ubuntu][docker-ubuntu], with [Xfce][xfce] desktops, headless **VNC**/[noVNC][novnc] environments and the current [Firefox][firefox] web browser with pre-configuration support.
 
 These images can be also successfully built and used on NAS devices. They
 have been tested with [Container Station][container-station] from [QNAP][qnap].
@@ -29,8 +33,6 @@ The images inherit the following components from the base images
 
 The images are regularly maintained and rebuilt. The history of notable changes is documented in [CHANGELOG][this-changelog].
 
-*Remark:* Resources for building images with default Firefox installation without configuration support can be found in the separate repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
-
 ### Image set
 
 - [accetto/ubuntu-vnc-xfce-firefox-plus][this-docker]
@@ -42,15 +44,9 @@ The images are regularly maintained and rebuilt. The history of notable changes 
 
 - **accetto/ubuntu-vnc-xfce-firefox-plus-preferences**
 
-  - `latest` based on `accetto/ubuntu-vnc-xfce-firefox-plus:latest`
-  - `rolling` based on `accetto/ubuntu-vnc-xfce-firefox-plus:rolling`
-
     These images are not actually contained in the [Docker repository][accetto-docker], because they are intended to keep pre-configured user-specific **Firefox preferences**. Users can put their favorite preferences into the configuration files and build the images using the provided [Dockerfile-plus-preferences][this-dockerfile-plus-preferences]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
 
 - **accetto/ubuntu-vnc-xfce-firefox-plus-profile**
-
-  - `latest` based on `accetto/ubuntu-vnc-xfce-firefox-plus:latest`
-  - `rolling` based on `accetto/ubuntu-vnc-xfce-firefox-plus:rolling`
 
     These images are also not actually contained in the [Docker repository][accetto-docker], because they are intended to keep pre-configured user-specific **Firefox profiles**. Users can prepare full Firefox profiles and build the images using the provided [Dockerfile-plus-profile][this-dockerfile-plus-profile]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
 
