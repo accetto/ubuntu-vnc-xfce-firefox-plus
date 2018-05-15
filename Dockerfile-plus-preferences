@@ -1,11 +1,18 @@
 # docker build -f Dockerfile-plus-preferences -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences .
 # docker build -f Dockerfile-plus-preferences --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:rolling .
+# docker build -f Dockerfile-plus-preferences --build-arg ARG_VNC_USER=root:root -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:root .
 
 ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
-ENV REFRESHED_AT 2018-05-10
+### Arguments can be provided during build
+ARG ARG_VNC_BLACKLIST_THRESHOLD
+ARG ARG_VNC_BLACKLIST_TIMEOUT
+ARG ARG_VNC_RESOLUTION
+ARG ARG_VNC_USER
+
+ENV REFRESHED_AT 2018-05-15
 
 LABEL vendor="accetto" \
     maintainer="https://github.com/accetto" \
@@ -14,16 +21,14 @@ LABEL vendor="accetto" \
     any.accetto.expose-services="6901:http,5901:xvnc" \
     any.accetto.tags="ubuntu, xfce, vnc, novnc, firefox, profile"
 
-### Arguments can be provided during build
-ARG VNC_BLACKLIST_THRESHOLD=20
-ARG VNC_BLACKLIST_TIMEOUT=0
-
 SHELL ["/bin/bash", "-c"]dim
 
 ### Environment config
 ENV \
-  VNC_BLACKLIST_TIMEOUT=$VNC_BLACKLIST_TIMEOUT \
-  VNC_BLACKLIST_THRESHOLD=$VNC_BLACKLIST_THRESHOLD \
+  VNC_BLACKLIST_THRESHOLD=${ARG_VNC_BLACKLIST_THRESHOLD:-20} \
+  VNC_BLACKLIST_TIMEOUT=${ARG_VNC_BLACKLIST_TIMEOUT:-0} \
+  VNC_RESOLUTION=${ARG_VNC_RESOLUTION:-1024x768} \
+  VNC_USER=${ARG_VNC_USER:-headless:headless} \
   INST_SCRIPTS=./src/firefox/install
 
 WORKDIR $HOME
