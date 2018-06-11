@@ -6,56 +6,50 @@ ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
+ENV REFRESHED_AT 2018-06-11
+
+LABEL \
+    any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with preferences" \
+    any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox preferences"
+
 ### Arguments can be provided during build
 ARG ARG_VNC_BLACKLIST_THRESHOLD
 ARG ARG_VNC_BLACKLIST_TIMEOUT
 ARG ARG_VNC_RESOLUTION
 ARG ARG_VNC_USER
 
-ENV REFRESHED_AT 2018-05-15
-
-LABEL vendor="accetto" \
-    maintainer="https://github.com/accetto" \
-    any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with preferences" \
-    any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox preferences" \
-    any.accetto.expose-services="6901:http,5901:xvnc" \
-    any.accetto.tags="ubuntu, xfce, vnc, novnc, firefox, profile"
-
-SHELL ["/bin/bash", "-c"]dim
-
-### Environment config
 ENV \
   VNC_BLACKLIST_THRESHOLD=${ARG_VNC_BLACKLIST_THRESHOLD:-20} \
   VNC_BLACKLIST_TIMEOUT=${ARG_VNC_BLACKLIST_TIMEOUT:-0} \
   VNC_RESOLUTION=${ARG_VNC_RESOLUTION:-1024x768} \
-  VNC_USER=${ARG_VNC_USER:-headless:headless} \
-  INST_SCRIPTS=./src/firefox/install
+  VNC_USER=${ARG_VNC_USER:-headless:headless}
+
+### Be sure to use root user
+USER 0
 
 WORKDIR $HOME
-
-### Be sure to use the root user
-USER 0
 
 ### Put all the user preferences you want to force administratively into the file 'all-accetto.js'.
 ### The preferences will be forced for each session in all profiles.
 ### The VNC user ('headles:headless' by default) will get permissions to modify the file.
 ### The file is currently empty. The fix for issue #2 has been moved to 'user.js'.
-COPY $INST_SCRIPTS/all-accetto.js /usr/lib/firefox/browser/defaults/preferences/
+COPY [ "./src/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
 
 ### Copy the file with default user preferences.
 ### The preferences will be forced for each session, but only in the profile containing the file.
 ### Make also a backup copy of the file (/headless/.mozilla/firefox/user.js.txt).
 ### The VNC user ('headles:headless' by default) will get permissions to modify or delete the file.
-COPY $INST_SCRIPTS/user.js $HOME/.mozilla/firefox/profile0.default
-COPY $INST_SCRIPTS/user.js $HOME/firefox.backup/profile0.default/user.js
+COPY [ "./src/user.js", "./.mozilla/firefox/profile0.default/" ]
+COPY [ "./src/user.js", "./firefox.backup/profile0.default/user.js" ]
 
 ### Fix permissions
-RUN chgrp $(id -g $(echo "$VNC_USER" | cut -d : -f 1)) /usr/lib/firefox/browser/defaults/preferences/all-accetto.js \
+RUN \
+    chgrp $(id -g $(echo "$VNC_USER" | cut -d : -f 1)) /usr/lib/firefox/browser/defaults/preferences/all-accetto.js \
     && chmod 664 /usr/lib/firefox/browser/defaults/preferences/all-accetto.js \
-    && chown $VNC_USER $HOME/.mozilla/firefox/profile0.default/user.js \
-    && chmod 600 $HOME/.mozilla/firefox/profile0.default/user.js \
-    && chown $VNC_USER $HOME/firefox.backup/profile0.default/user.js \
-    && chmod 600 $HOME/firefox.backup/profile0.default/user.js
+    && chown $VNC_USER ./.mozilla/firefox/profile0.default/user.js \
+    && chmod 600 ./.mozilla/firefox/profile0.default/user.js \
+    && chown $VNC_USER ./firefox.backup/profile0.default/user.js \
+    && chmod 600 ./firefox.backup/profile0.default/user.js
 
-### Switch to the non-root user
+### Switch to back non-root user
 USER $VNC_USER

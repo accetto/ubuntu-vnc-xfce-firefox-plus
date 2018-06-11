@@ -5,40 +5,34 @@ ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
+ENV REFRESHED_AT 2018-06-11
+
+LABEL \
+    any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with profile" \
+    any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox profile"
+
 ### Arguments can be provided during build
 ARG ARG_VNC_BLACKLIST_THRESHOLD
 ARG ARG_VNC_BLACKLIST_TIMEOUT
 ARG ARG_VNC_RESOLUTION
 ARG ARG_VNC_USER
 
-ENV REFRESHED_AT 2018-05-15
-
-LABEL vendor="accetto" \
-    maintainer="https://github.com/accetto" \
-    any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with profile" \
-    any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox profile" \
-    any.accetto.expose-services="6901:http,5901:xvnc" \
-    any.accetto.tags="ubuntu, xfce, vnc, novnc, firefox, profile"
-
-SHELL ["/bin/bash", "-c"]
-
-### Environment config
 ENV \
   VNC_BLACKLIST_THRESHOLD=${ARG_VNC_BLACKLIST_THRESHOLD:-20} \
   VNC_BLACKLIST_TIMEOUT=${ARG_VNC_BLACKLIST_TIMEOUT:-0} \
   VNC_RESOLUTION=${ARG_VNC_RESOLUTION:-1024x768} \
   VNC_USER=${ARG_VNC_USER:-headless:headless}
 
-WORKDIR $HOME
-
-### Be sure to use the root user
+### Be sure to use root user
 USER 0
 
-### Copy the pre-configured Firefox profile
-COPY ./src/firefox/profile/ $HOME/.mozilla/
+WORKDIR $HOME
+
+### Copy pre-configured Firefox profile
+COPY [ "./src/firefox/profile/", "./.mozilla/" ]
 
 ### Change owner
-RUN chown -R $VNC_USER $HOME/.mozilla
+RUN chown -R $VNC_USER ./.mozilla
 
 ### Switch to the non-root user
 USER $VNC_USER

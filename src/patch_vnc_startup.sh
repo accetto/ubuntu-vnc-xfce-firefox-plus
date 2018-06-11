@@ -4,7 +4,7 @@ set -e
 set -u
 
 TARGET="$STARTUPDIR/vnc_startup.sh"
-PATCH="$INST_SCRIPTS/patch_vnc_startup.txt"
+PATCH="./patch_vnc_startup.txt"
 
 LINE=$(grep -n 'set -u' $TARGET | cut -d ":" -f 1)
 LINE=$(($LINE+1))
