@@ -6,8 +6,6 @@ ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
-ENV REFRESHED_AT 2018-10-28
-
 LABEL \
     any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with preferences" \
     any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox preferences"

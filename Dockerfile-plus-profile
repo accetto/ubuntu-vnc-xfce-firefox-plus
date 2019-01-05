@@ -5,8 +5,6 @@ ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
-ENV REFRESHED_AT 2018-10-28
-
 LABEL \
     any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with profile" \
     any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox profile"
@@ -29,7 +27,7 @@ USER 0
 WORKDIR ${HOME}
 
 ### Copy pre-configured Firefox profile
-COPY [ "./src/firefox/profile/", "./.mozilla/" ]
+COPY [ "./src/profile/", "./.mozilla/" ]
 
 ### Change owner
 RUN chown -R $VNC_USER ./.mozilla

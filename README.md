@@ -37,6 +37,8 @@ Running containers in background is the primary scenario this image has been dev
 
 The image is regularly maintained and rebuilt. The history of notable changes is documented in [CHANGELOG][this-changelog].
 
+![screenshot-container][screenshot-container]
+
 ### Image set
 
 - [accetto/ubuntu-vnc-xfce-firefox-plus][this-docker]
@@ -235,3 +237,5 @@ If you do not find a solution, you can file a new issue. The better you describe
 [tightvnc]: http://www.tightvnc.com
 [vim]: https://www.vim.org/
 [xfce]: http://www.xfce.org
+
+[screenshot-container]: https://raw.githubusercontent.com/accetto/ubuntu-vnc-xfce-firefox-plus/master/ubuntu-vnc-xfce-firefox-plus.jpg
