@@ -1,4 +1,6 @@
 # docker build -f Dockerfile-plus-profile -t accetto/ubuntu-vnc-xfce-firefox-plus-profile .
+# docker build -f Dockerfile-plus-profile -t accetto/ubuntu-vnc-xfce-firefox-plus-profile:dev .
+# docker build -f Dockerfile-plus-profile --build-arg BASETAG=dev -t accetto/ubuntu-vnc-xfce-firefox-plus-profile:dev .
 # docker build -f Dockerfile-plus-profile --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus-profile:rolling .
 
 ARG BASETAG=latest
@@ -27,10 +29,12 @@ USER 0
 WORKDIR ${HOME}
 
 ### Copy pre-configured Firefox profile
-COPY [ "./src/profile/", "./.mozilla/" ]
+COPY [ "./src/firefox/profile/", "./.mozilla/" ]
 
 ### Change owner
 RUN chown -R $VNC_USER ./.mozilla
+
+ENV REFRESHED_AT 2019-04-28
 
 ### Switch to the non-root user
 USER ${VNC_USER}

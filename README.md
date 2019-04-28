@@ -1,4 +1,4 @@
-# Headless Ubuntu/Xfce containers with VNC/noVNC and configurable Firefox
+# Headless Ubuntu/Xfce container with VNC/noVNC and configurable Firefox
 
 ## accetto/ubuntu-vnc-xfce-firefox-plus
 
@@ -8,21 +8,21 @@
 
 ***
 
-**This repository** contains resources for building Docker images based on [Ubuntu][docker-ubuntu], with [Xfce][xfce] desktops, headless **VNC**/[noVNC][novnc] environments and the current [Firefox][firefox] web browser with pre-configuration support.
+**This repository** contains resources for building a Docker image based on [Ubuntu][docker-ubuntu] with [Xfce][xfce] desktop environment, **VNC**/[noVNC][novnc] servers for headless use and the current [Firefox][firefox] web browser with pre-configuration support.
 
-This image can be successfully built and used on Linux, NAS devices and Windows.
+The image can be successfully built and used on Linux, Windows, Mac and NAS devices. It has been tested with [Docker Desktop][docker-desktop] on [Ubuntu flavours][ubuntu-flavours], [Windows 10][docker-for-windows] and [Container Station][container-station] from [QNAP][qnap].
 
-It has been tested with [Docker CE][docker-ce] on [Ubuntu flavours][ubuntu-flavours], with [Container Station][container-station] on a NAS from [QNAP][qnap] and with [Docker for Windows][docker-for-windows] on Windows 10.
-
-The image is perfect for fast creation of light-weight web browser containers. They can be thrown away easily and replaced quickly, improving browsing privacy. They run under a non-root user by default, improving browsing security.
+Containers created from this image make perfect light-weight web browsers. They can be thrown away easily and replaced quickly, improving browsing privacy. They run under a non-root user by default, improving browsing security.
 
 They make also excellent long-term browsers, because the preferences and profiles can be pre-configured and stored on volumes that survive container destruction.
 
 There are two ways of customization. Firstly, it's possible to force Firefox preferences by modifying the provided **user.js** file. Secondly, it's possible to use a complete Firefox profile, previously created on a volume. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
 
-Frequently used preferences and profiles can be also embedded into new user built images. The ready-to-use Dockerfiles are already provided (see [below](#user-content-image-set)). The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes how to build such images.
+Frequently used preferences and profiles can be also embedded into new customized images, built by the user. The ready-to-use Dockerfiles are already provided (see [below](#user-content-image-set)). The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes how to build such images.
 
-The image is based on the [accetto/ubuntu-vnc-xfce][accetto-docker-ubuntu-vnc-xfce] image, just adding the [Firefox][firefox] browser and resources for its customization.
+Running in background is the primary scenario for the containers, but using them interactively in foreground is also possible. For examples see the description below or the [HOWTO][this-wiki-howto] section in [Wiki][this-wiki].
+
+The image is based on the [accetto/ubuntu-vnc-xfce][accetto-docker-ubuntu-vnc-xfce] image, just adding the [Firefox][firefox] browser and the resources for its customization.
 
 The image inherits the following components from its [base image][accetto-docker-ubuntu-vnc-xfce]:
 
@@ -31,6 +31,7 @@ The image inherits the following components from its [base image][accetto-docker
 - [noVNC][novnc] HTML5 clients (full and lite) (TCP port **6901**)
 - popular text editor [vim][vim]
 - lite but advanced graphical editor [mousepad][mousepad]
+- **ping** utility
 - container start-up options
 
 Running containers in background is the primary scenario this image has been developed for. However, running in foreground can be useful in many cases. See the description below for examples of using the containers both ways.
@@ -44,21 +45,20 @@ The image is regularly maintained and rebuilt. The history of notable changes is
 - [accetto/ubuntu-vnc-xfce-firefox-plus][this-docker]
 
   - `latest` based on `accetto/ubuntu-vnc-xfce:latest`
-  - `rolling` based on `accetto/ubuntu-vnc-xfce:rolling`
 
-    [![version badge](https://images.microbadger.com/badges/version/accetto/ubuntu-vnc-xfce-firefox-plus.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus "Get your own version badge on microbadger.com") [![size badge](https://images.microbadger.com/badges/image/accetto/ubuntu-vnc-xfce-firefox-plus.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus "Get your own image badge on microbadger.com") [![version badge](https://images.microbadger.com/badges/version/accetto/ubuntu-vnc-xfce-firefox-plus:rolling.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus:rolling "Get your own version badge on microbadger.com") [![size badge](https://images.microbadger.com/badges/image/accetto/ubuntu-vnc-xfce-firefox-plus:rolling.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus:rolling "Get your own image badge on microbadger.com")
+    [![version badge](https://images.microbadger.com/badges/version/accetto/ubuntu-vnc-xfce-firefox-plus.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus "Get your own version badge on microbadger.com") [![size badge](https://images.microbadger.com/badges/image/accetto/ubuntu-vnc-xfce-firefox-plus.svg)](https://microbadger.com/images/accetto/ubuntu-vnc-xfce-firefox-plus "Get your own image badge on microbadger.com")
 
 - **accetto/ubuntu-vnc-xfce-firefox-plus-preferences**
 
-    These images are not actually contained in the [Docker repository][accetto-docker], because they are intended to keep pre-configured user-specific **Firefox preferences**. Users can put their favorite preferences into the configuration files and build the images using the provided [Dockerfile-plus-preferences][this-dockerfile-plus-preferences]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
+    This image is not actually contained in the [Docker repository][accetto-docker], because it is intended to keep pre-configured user-specific **Firefox preferences**. Users can put their favorite preferences into the configuration files and build the image using the provided [Dockerfile-plus-preferences][this-dockerfile-plus-preferences]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
 
 - **accetto/ubuntu-vnc-xfce-firefox-plus-profile**
 
-    These images are also not actually contained in the [Docker repository][accetto-docker], because they are intended to keep pre-configured user-specific **Firefox profiles**. Users can prepare full Firefox profiles and build the images using the provided [Dockerfile-plus-profile][this-dockerfile-plus-profile]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
+    This image is also not actually contained in the [Docker repository][accetto-docker], because it is intended to keep pre-configured user-specific **Firefox profiles**. Users can prepare a full Firefox profile and build the image using the provided [Dockerfile-plus-profile][this-dockerfile-plus-profile]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
 
 ### Ports
 
-The images expose the following **TCP** ports:
+Following **TCP** ports are exposed:
 
 - **5901** used for access over **VNC**
 - **6901** used for access over [noVNC][novnc]
@@ -67,7 +67,7 @@ The default **VNC user** password is **headless**.
 
 ### Volumes
 
-The images do not create or use any external volumes by default. However, the following folders make good mounting points:
+The containers do not create or use any external volumes by default. However, the following folders make good mounting points:
 
 - /home/headless/Documents/
 - /home/headless/Downloads/
@@ -193,9 +193,13 @@ It's also possible to provide the password through the links:
 
 ## Issues
 
-If you have found a problem or just have a question, please check the [Issues][this-issues] and the [Troubleshooting][this-wiki-troubleshooting], [FAQ][this-wiki-faq] and [HOWTO][this-wiki-howto] pages in [Wiki][this-wiki] first. Please do not overlook also the closed issues.
+If you have found a problem or you just have a question, please check the [Issues][this-issues] and the [Troubleshooting][this-wiki-troubleshooting], [FAQ][this-wiki-faq] and [HOWTO][this-wiki-howto] sections in [Wiki][this-wiki] first. Please do not overlook the closed issues.
 
 If you do not find a solution, you can file a new issue. The better you describe the problem, the bigger the chance it'll be solved soon.
+
+## Credits
+
+Credit goes to all the countless people and companies who contribute to open source community and make so many dreamy things real.
 
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-plus/
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
@@ -222,8 +226,8 @@ If you do not find a solution, you can file a new issue. The better you describe
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
-[docker-for-windows]: https://docs.docker.com/docker-for-windows/
-[docker-ce]: https://docs.docker.com/install/
+[docker-for-windows]: https://hub.docker.com/editions/community/docker-ce-desktop-windows
+[docker-desktop]: https://www.docker.com/products/docker-desktop
 
 [qnap]: https://www.qnap.com/en/
 [container-station]: https://www.qnap.com/solution/container_station/en/

@@ -1,8 +1,9 @@
 # docker build -t accetto/ubuntu-vnc-xfce-firefox-plus .
-# docker build --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus:rolling .
+# docker build -t accetto/ubuntu-vnc-xfce-firefox-plus:dev .
+# docker build --build-arg BASETAG=dev -t accetto/ubuntu-vnc-xfce-firefox-plus:dev .
 # docker build --build-arg ARG_VNC_USER=root:root -t accetto/ubuntu-vnc-xfce-firefox-plus:root .
 # docker build --build-arg ARG_VNC_RESOLUTION=1360x768 -t accetto/ubuntu-vnc-xfce-firefox-plus .
-# docker build --build-arg BASETAG=dev -t accetto/ubuntu-vnc-xfce-firefox-plus:dev .
+# docker build --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus:rolling .
 
 ARG BASETAG=latest
 
@@ -26,13 +27,11 @@ ENV VNC_USER=${ARG_VNC_USER:-headless:headless}
 WORKDIR ${HOME}
 SHELL ["/bin/bash", "-c"]
 
-COPY [ "./src/firefox.desktop", "./Desktop/" ]
-
 ### Put all user preferences you want to force administratively into the file 'all-accetto.js'.
 ### The preferences will be forced for each session in all profiles.
 ### The VNC user ('headles:headless' by default) will get permissions to modify the file.
 ### The file is currently empty. The fix for issue #2 has been moved to 'user.js'.
-COPY [ "./src/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
+COPY [ "./src/firefox/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
 
 ### Create the default profile folder and put the file with default preferences there.
 ### The preferences will be forced for each session, but only in the profile containing the file.
@@ -43,8 +42,8 @@ RUN mkdir \
     ./.mozilla/firefox \
     ./.mozilla/firefox/profile0.default
 
-COPY [ "./src/profiles.ini", "./.mozilla/firefox/" ]
-COPY [ "./src/user.js", "./.mozilla/firefox/profile0.default/" ]
+COPY [ "./src/firefox/profiles.ini", "./.mozilla/firefox/" ]
+COPY [ "./src/firefox/user.js", "./.mozilla/firefox/profile0.default/" ]
 COPY [ "./src/create_user_and_fix_permissions.sh", "./src/patch_vnc_startup.*", "./" ]
 
 ### 'sync' mitigates automated build failures
@@ -52,7 +51,6 @@ RUN \
     cp -r ./.mozilla/firefox/ $HOME/firefox.backup/ \
     && chmod +x \
         ./create_user_and_fix_permissions.sh \
-        ./Desktop/firefox.desktop \
         ./patch_vnc_startup.sh \
     && sync \
     && ./patch_vnc_startup.sh \
@@ -78,14 +76,17 @@ ENV \
   VNC_BLACKLIST_TIMEOUT=${ARG_VNC_BLACKLIST_TIMEOUT:-0} \
   VNC_RESOLUTION=${ARG_VNC_RESOLUTION:-1024x768} 
 
-### Preconfigure Xfce panels
-COPY [ "./src/xfce4/panel", "./.config/xfce4/panel/" ]
-COPY [ "./src/xfce4/xfce4-panel.xml", "./.config/xfce4/xfconf/xfce-perchannel-xml/" ]
-RUN chown -R ${VNC_USER} ./.config \
-    && chmod 700 ./.config/xfce4/xfconf/xfce-perchannel-xml \
-    && chmod 644 ./.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
+### Preconfigure Xfce
+COPY [ "./src/home/Desktop", "./Desktop/" ]
+COPY [ "./src/home/config/xfce4/panel", "./.config/xfce4/panel/" ]
+COPY [ "./src/home/config/xfce4/xfconf/xfce-perchannel-xml", "./.config/xfce4/xfconf/xfce-perchannel-xml/" ]
+RUN chown -R ${VNC_USER} ${HOME} \
+    && chmod 755 ./Desktop/*.desktop \
     && chmod 700 ./.config/xfce4/panel/launcher* \
-    && chmod 644 ./.config/xfce4/panel/launcher*/*
+    && chmod 644 ./.config/xfce4/panel/launcher*/*.desktop \
+    && chmod 644 ./.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
+
+ENV REFRESHED_AT 2019-04-28
     
 ### Switch to non-root user
 USER ${VNC_USER}

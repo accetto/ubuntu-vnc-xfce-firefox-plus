@@ -1,6 +1,8 @@
 # docker build -f Dockerfile-plus-preferences -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences .
-# docker build -f Dockerfile-plus-preferences --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:rolling .
+# docker build -f Dockerfile-plus-preferences -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:dev .
+# docker build -f Dockerfile-plus-preferences --build-arg BASETAG=dev -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:dev .
 # docker build -f Dockerfile-plus-preferences --build-arg ARG_VNC_USER=root:root -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:root .
+# docker build -f Dockerfile-plus-preferences --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:rolling .
 
 ARG BASETAG=latest
 
@@ -31,14 +33,14 @@ WORKDIR ${HOME}
 ### The preferences will be forced for each session in all profiles.
 ### The VNC user ('headles:headless' by default) will get permissions to modify the file.
 ### The file is currently empty. The fix for issue #2 has been moved to 'user.js'.
-COPY [ "./src/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
+COPY [ "./src/firefox/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
 
 ### Copy the file with default user preferences.
 ### The preferences will be forced for each session, but only in the profile containing the file.
 ### Make also a backup copy of the file (/headless/.mozilla/firefox/user.js.txt).
 ### The VNC user ('headles:headless' by default) will get permissions to modify or delete the file.
-COPY [ "./src/user.js", "./.mozilla/firefox/profile0.default/" ]
-COPY [ "./src/user.js", "./firefox.backup/profile0.default/user.js" ]
+COPY [ "./src/firefox/user.js", "./.mozilla/firefox/profile0.default/" ]
+COPY [ "./src/firefox/user.js", "./firefox.backup/profile0.default/user.js" ]
 
 ### Fix permissions
 RUN \
@@ -48,6 +50,8 @@ RUN \
     && chmod 600 ./.mozilla/firefox/profile0.default/user.js \
     && chown $VNC_USER ./firefox.backup/profile0.default/user.js \
     && chmod 600 ./firefox.backup/profile0.default/user.js
+
+ENV REFRESHED_AT 2019-04-28
 
 ### Switch to back non-root user
 USER ${VNC_USER}
