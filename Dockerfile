@@ -80,13 +80,10 @@ ENV \
 COPY [ "./src/home/Desktop", "./Desktop/" ]
 COPY [ "./src/home/config/xfce4/panel", "./.config/xfce4/panel/" ]
 COPY [ "./src/home/config/xfce4/xfconf/xfce-perchannel-xml", "./.config/xfce4/xfconf/xfce-perchannel-xml/" ]
-RUN chown -R ${VNC_USER} ${HOME} \
-    && chmod 755 ./Desktop/*.desktop \
-    && chmod 700 ./.config/xfce4/panel/launcher* \
-    && chmod 644 ./.config/xfce4/panel/launcher*/*.desktop \
-    && chmod 644 ./.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
 
-ENV REFRESHED_AT 2019-05-22
+RUN ${STARTUPDIR}/set_user_permissions.sh $STARTUPDIR $HOME
+
+ENV REFRESHED_AT 2019-05-26
     
 ### Switch to non-root user
 USER ${VNC_USER}
