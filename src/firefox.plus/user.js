@@ -4,5 +4,5 @@ user_pref("browser.tabs.remote.autostart", false);
 
 // Add the preferences you want to force here.
 // The preferences will be forced for each session, but only in the profile containing this file.
-// There is also a backup copy of this file in '/home/headless/firefox.backup'.
+// There is also a backup copy of this file in '/home/headless/firefox.plus'.
 // The VNC user ('headless:headless' by default) gets permissions to modify or delete this file.

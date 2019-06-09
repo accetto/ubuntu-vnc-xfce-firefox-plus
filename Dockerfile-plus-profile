@@ -34,7 +34,7 @@ COPY [ "./src/firefox/profile/", "./.mozilla/" ]
 ### Change owner
 RUN chown -R $VNC_USER ./.mozilla
 
-ENV REFRESHED_AT 2019-06-09
+ENV REFRESHED_AT 2019-06-10
 
 ### Switch to the non-root user
 USER ${VNC_USER}

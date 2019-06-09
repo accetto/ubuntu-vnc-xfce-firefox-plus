@@ -6,6 +6,10 @@
 
 ***
 
+### Version 19.06.1
+
+- Fix in **Dockerfile-plus-preferences**
+
 ### Version 19.06
 
 - Script **set_user_permissions.sh** updated (inherited from the [base image][this-base])

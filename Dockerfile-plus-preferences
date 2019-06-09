@@ -29,22 +29,16 @@ USER 0
 
 WORKDIR ${HOME}
 
-
 ### Copy the file with default user preferences.
 ### The preferences will be forced for each session, but only in the profile containing the file.
-### Make also a backup copy of the file (/headless/.mozilla/firefox/user.js.txt).
+### Make also a backup copy of the file 'user.js'.
 ### The VNC user ('headles:headless' by default) will get permissions to modify or delete the file.
-COPY [ "./src/firefox/user.js", "./.mozilla/firefox/profile0.default/" ]
-COPY [ "./src/firefox/user.js", "./firefox.plus/profile0.default/user.js" ]
+COPY [ "./src/firefox.plus/user.js", "./.mozilla/firefox/profile0.default/" ]
+COPY [ "./src/firefox.plus/user.js", "./firefox.plus/user.js" ]
 
-### Fix permissions
-RUN \
-    chown $VNC_USER ./.mozilla/firefox/profile0.default/user.js \
-    && chmod 600 ./.mozilla/firefox/profile0.default/user.js \
-    && chown $VNC_USER ./firefox.plus/profile0.default/user.js \
-    && chmod 600 ./firefox.plus/profile0.default/user.js
+RUN ${STARTUPDIR}/set_user_permissions.sh $STARTUPDIR $HOME
 
-ENV REFRESHED_AT 2019-06-09
+ENV REFRESHED_AT 2019-06-10
 
 ### Switch to back non-root user
 USER ${VNC_USER}
