@@ -27,12 +27,6 @@ ENV VNC_USER=${ARG_VNC_USER:-headless:headless}
 WORKDIR ${HOME}
 SHELL ["/bin/bash", "-c"]
 
-### Put all user preferences you want to force administratively into the file 'all-accetto.js'.
-### The preferences will be forced for each session in all profiles.
-### The VNC user ('headles:headless' by default) will get permissions to modify the file.
-### The file is currently empty. The fix for issue #2 has been moved to 'user.js'.
-COPY [ "./src/firefox/all-accetto.js", "/usr/lib/firefox/browser/defaults/preferences/" ]
-
 ### Create the default profile folder and put the file with default preferences there.
 ### The preferences will be forced for each session, but only in the profile containing the file.
 ### The VNC user ('headles:headless' by default) will get permissions to modify or delete the file.
@@ -40,24 +34,28 @@ COPY [ "./src/firefox/all-accetto.js", "/usr/lib/firefox/browser/defaults/prefer
 RUN mkdir \
     ./.mozilla \
     ./.mozilla/firefox \
-    ./.mozilla/firefox/profile0.default
+    ./.mozilla/firefox/profile0.default \
+    ./firefox.plus
 
 COPY [ "./src/firefox/profiles.ini", "./.mozilla/firefox/" ]
-COPY [ "./src/firefox/user.js", "./.mozilla/firefox/profile0.default/" ]
+COPY [ "./src/firefox.plus/user.js", "./.mozilla/firefox/profile0.default/" ]
 COPY [ "./src/create_user_and_fix_permissions.sh", "./src/patch_vnc_startup.*", "./" ]
+COPY [ "./src/firefox.plus/*.js", "./src/firefox.plus/*.sh", "./firefox.plus/"]
+COPY [ "./src/firefox.plus/*.svg", "/usr/share/icons/hicolor/scalable/apps/"]
 
 ### 'sync' mitigates automated build failures
 RUN \
-    cp -r ./.mozilla/firefox/ $HOME/firefox.backup/ \
-    && chmod +x \
+    chmod +x \
         ./create_user_and_fix_permissions.sh \
         ./patch_vnc_startup.sh \
+        ./firefox.plus/*.sh \
     && sync \
     && ./patch_vnc_startup.sh \
     && ./create_user_and_fix_permissions.sh $STARTUPDIR $HOME \
     && rm \
         ./*.sh \
-        ./patch_vnc_startup.txt
+        ./patch_vnc_startup.txt \
+    && gtk-update-icon-cache -f /usr/share/icons/hicolor
 
 FROM stage-config as stage-final
 
@@ -83,7 +81,7 @@ COPY [ "./src/home/config/xfce4/xfconf/xfce-perchannel-xml", "./.config/xfce4/xf
 
 RUN ${STARTUPDIR}/set_user_permissions.sh $STARTUPDIR $HOME
 
-ENV REFRESHED_AT 2019-05-26
+ENV REFRESHED_AT 2019-06-09
     
 ### Switch to non-root user
 USER ${VNC_USER}

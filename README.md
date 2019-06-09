@@ -6,11 +6,9 @@
 
 ***
 
-### [Warning - Firefox 67 has changed default profile handling](https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues)
+**Attention:** Resources for building images with default Firefox installation without configuration support can be found in its own GitHub repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
 
 ***
-
-**Attention:** Resources for building images with default Firefox installation without configuration support can be found in its own GitHub repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
 
 **This repository** contains resources for building a Docker image based on [Ubuntu][docker-ubuntu] with [Xfce][xfce] desktop environment, **VNC**/[noVNC][novnc] servers for headless use and the current [Firefox][firefox] web browser with pre-configuration support.
 
@@ -37,6 +35,13 @@ The image inherits the following components from its [base image][accetto-docker
 - lite but advanced graphical editor [mousepad][mousepad]
 - **ping** utility
 - container start-up options
+
+**Please note** that **Firefox 67** has changed default profile handling and therefore the pre-created folder `profile0.default`, which contains the file `user.js` with user preferences, will not be used automatically, until you explicitly choose the folder before the first Firefox start. The other option is to copy the user preferences afterwards using the provided script. You can find more information about it in the [issue #3][this-issue-3].
+
+The following desktop launchers have been added for your convenience:
+
+- **FF Profile Manager** starts the Firefox with the argument **-P** so you can choose Firefox profiles or create new ones conveniently. It is recommended to choose the pre-created profile folder `profile0.default` before the first Firefox start. Note that it shows up as the **default** profile in the Profile Manager's list and that the actual profile data will be created by the Firefox itself.
+- **Copy FF Preferences** starts the script for copying the file **user.js**, containing your own Firefox preferences, to one or more Firefox profiles interactively. You can use it if you haven't chosen the profile before the first Firefox start or you have created new ones later.
 
 Running containers in background is the primary scenario this image has been developed for. However, running in foreground can be useful in many cases. See the description below for examples of using the containers both ways.
 
@@ -209,7 +214,9 @@ Credit goes to all the countless people and companies who contribute to open sou
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
 
 [this-changelog]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/blob/master/CHANGELOG.md
+
 [this-issues]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues
+[this-issue-3]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues/3
 
 [this-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki
 [this-wiki-howto]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki/How-to

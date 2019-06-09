@@ -49,7 +49,7 @@ done
 
 MOZILLA="$HOME/.mozilla"
 FFOX="$MOZILLA/firefox"
-FFOX_BAK="$HOME/firefox.backup"
+FFOX_BAK="$HOME/firefox.plus"
 if [[ -d "$MOZILLA" ]] ; then
 
     LIST="$MOZILLA $FFOX $FFOX/profile0.default $FFOX_BAK $FFOX_BAK/profile0.default"
@@ -61,11 +61,6 @@ if [[ -d "$MOZILLA" ]] ; then
             chmod -R 700 $var
         fi
     done
-
-    var="/usr/lib/firefox/browser/defaults/preferences/all-accetto.js"
-    echo "$FIXING $var"
-    chgrp $UGROUP $var
-    chmod 664 $var
 
     ARRA=("$FFOX/profiles.ini" "$FFOX/profile0.default/user.js" "$FFOX_BAK/profiles.ini" "$FFOX_BAK/profile0.default/user.js")
     ARRB=(644 600 644 600)

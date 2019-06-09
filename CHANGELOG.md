@@ -6,6 +6,20 @@
 
 ***
 
+### Version 19.06
+
+- Script **set_user_permissions.sh** updated (inherited from the [base image][this-base])
+  - root group replaced by the current user group
+- **TigerVNC Viewer** desktop launcher icon updated (inherited from the [base image][this-base])
+- Folder **firefox.backup** renamed to **firefox.plus**
+  - script **create_user_and_fix_permissions.sh** and related also updated
+- Helper utility script **copy_firefox_user_preferences.sh** added
+  - desktop launcher **Copy FF Preferences** for the utility added
+  - desktop launcher **FF Profile Manager** added
+- File **all-accetto.js** removed because the related functionality doesn't seem to be supported any more
+  - related scripts updated accordingly
+- Firefox version **67.0.1**
+
 ### Version 19.05
 
 - Fixed [Issue #2](https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues/2) (How to run as non-root user) (actually the **issue #8** of the [base image][this-base])
