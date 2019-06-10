@@ -6,6 +6,10 @@
 
 ***
 
+### Version 19.06.2
+
+- Fix in **create_user_and_fix_permissions.sh**
+
 ### Version 19.06.1
 
 - Fix in **Dockerfile-plus-preferences**
