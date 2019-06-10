@@ -52,7 +52,7 @@ FFOX="$MOZILLA/firefox"
 FFOX_BAK="$HOME/firefox.plus"
 if [[ -d "$MOZILLA" ]] ; then
 
-    LIST="$MOZILLA $FFOX $FFOX/profile0.default $FFOX_BAK $FFOX_BAK/profile0.default"
+    LIST="$MOZILLA $FFOX $FFOX/profile0.default $FFOX_BAK"
     for var in $LIST
     do
         if [[ -d "$var" ]] ; then
@@ -62,7 +62,7 @@ if [[ -d "$MOZILLA" ]] ; then
         fi
     done
 
-    ARRA=("$FFOX/profiles.ini" "$FFOX/profile0.default/user.js" "$FFOX_BAK/profiles.ini" "$FFOX_BAK/profile0.default/user.js")
+    ARRA=("$FFOX/profiles.ini" "$FFOX/profile0.default/user.js" "$FFOX_BAK/user.js")
     ARRB=(644 600 644 600)
     MAXI=${#ARRA[@]}
     for (( i=0; i<$MAXI; i++ ))
