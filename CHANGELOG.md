@@ -6,6 +6,14 @@
 
 ***
 
+### Version 19.06.3
+
+- File manager (Thunar) pre-configured (inherited from the [base image][this-base])
+  - *Owner*, *Permissions* and *Group* columns shown by default
+  - *Type* column suppressed
+- Fix in **create_user_and_fix_permissions.sh**
+- Firefox version **67.0.3**
+
 ### Version 19.06.2
 
 - Fix in **create_user_and_fix_permissions.sh**

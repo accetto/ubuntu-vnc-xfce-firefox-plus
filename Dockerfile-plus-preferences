@@ -38,9 +38,9 @@ COPY [ "./src/firefox.plus/user.js", "./firefox.plus/user.js" ]
 
 RUN ${STARTUPDIR}/set_user_permissions.sh $STARTUPDIR $HOME
 
-ENV REFRESHED_AT 2019-06-10
+ENV REFRESHED_AT 2019-06-14
 
-### Switch to back non-root user
+### Switch to non-root user
 USER ${VNC_USER}
 
 ### Issue #7 (base): Mitigating problems with foreground mode
