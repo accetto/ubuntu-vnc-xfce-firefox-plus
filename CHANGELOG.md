@@ -6,6 +6,12 @@
 
 ***
 
+### Version 19.06.4
+
+- **README** updated
+  - reference to [accetto/xubuntu-vnc-firefox][accetto-docker-xubuntu-vnc-firefox] based on [accetto/xubuntu-vnc][accetto-docker-xubuntu-vnc] added - a streamlined and simplified image, without [noVNC][novnc] and [nss_wrapper][nsswrapper], with a growing family of derived images with various applications
+- Firefox version **67.0.4**
+
 ### Version 19.06.3
 
 - File manager (Thunar) pre-configured (inherited from the [base image][this-base])
@@ -101,6 +107,8 @@
   - Resources for images with default Firefox installation moved to repository [accetto/ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]
   - This image contains Firefox installation with pre-configuration support
 
+***
+
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-plus/
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
 [this-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki
@@ -109,6 +117,12 @@
 [accetto-github-ubuntu-vnc-xfce]: https://github.com/accetto/ubuntu-vnc-xfce
 [accetto-github-ubuntu-vnc-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-firefox
 
+[accetto-docker-xubuntu-vnc]: https://hub.docker.com/r/accetto/xubuntu-vnc
+[accetto-docker-xubuntu-vnc-firefox]:https://hub.docker.com/r/accetto/xubuntu-vnc-firefox
+
 [accetto-docker-argbash-docker]: https://hub.docker.com/r/accetto/argbash-docker
 [accetto-github-argbash-docker]: https://github.com/accetto/argbash-docker
+
 [mousepad]: https://github.com/codebrainz/mousepad
+[novnc]: https://github.com/kanaka/noVNC
+[nsswrapper]: https://cwrap.org/nss_wrapper.html

@@ -6,9 +6,11 @@
 
 ***
 
-**Attention:** Resources for building images with default Firefox installation without configuration support can be found in its own GitHub repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
+**TIP** Unless you need [noVNC][novnc] or [nss_wrapper][nsswrapper], you can use the newer image [accetto/xubuntu-vnc-firefox][accetto-docker-xubuntu-vnc-firefox] based on [accetto/xubuntu-vnc][accetto-docker-xubuntu-vnc] - a streamlined and simplified version of this image with a growing family of derived application images.
 
 ***
+
+**Attention:** Resources for building images with default Firefox installation without configuration support can be found in its own GitHub repository [ubuntu-vnc-xfce-firefox][accetto-github-ubuntu-vnc-xfce-firefox]. Resources for building base images are in the GitHub repository [accetto/ubuntu-vnc-xfce][accetto-github-ubuntu-vnc-xfce].
 
 **This repository** contains resources for building a Docker image based on [Ubuntu][docker-ubuntu] with [Xfce][xfce] desktop environment, **VNC**/[noVNC][novnc] servers for headless use and the current [Firefox][firefox] web browser with pre-configuration support.
 
@@ -210,6 +212,8 @@ If you do not find a solution, you can file a new issue. The better you describe
 
 Credit goes to all the countless people and companies who contribute to open source community and make so many dreamy things real.
 
+***
+
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-plus/
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
 
@@ -234,6 +238,9 @@ Credit goes to all the countless people and companies who contribute to open sou
 
 [accetto-github-ubuntu-vnc-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-firefox/
 
+[accetto-docker-xubuntu-vnc]: https://hub.docker.com/r/accetto/xubuntu-vnc
+[accetto-docker-xubuntu-vnc-firefox]:https://hub.docker.com/r/accetto/xubuntu-vnc-firefox
+
 [docker-ubuntu]: https://hub.docker.com/_/ubuntu/
 [docker-doc]: https://docs.docker.com/
 [docker-doc-managing-data]: https://docs.docker.com/storage/
@@ -248,6 +255,7 @@ Credit goes to all the countless people and companies who contribute to open sou
 [firefox]: https://www.mozilla.org
 [mousepad]: https://github.com/codebrainz/mousepad
 [novnc]: https://github.com/kanaka/noVNC
+[nsswrapper]: https://cwrap.org/nss_wrapper.html
 [tigervnc]: http://tigervnc.org
 [tightvnc]: http://www.tightvnc.com
 [vim]: https://www.vim.org/
