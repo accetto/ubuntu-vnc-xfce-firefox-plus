@@ -6,7 +6,7 @@
 
 ***
 
-**TIP** Unless you need [noVNC][novnc] or [nss_wrapper][nsswrapper], you can use the newer image [accetto/xubuntu-vnc-firefox][accetto-docker-xubuntu-vnc-firefox] based on [accetto/xubuntu-vnc][accetto-docker-xubuntu-vnc] - a streamlined and simplified version of this image with a growing family of derived application images.
+**TIP** Unless you need [noVNC][novnc] or [nss_wrapper][nsswrapper], you can use the newer image [accetto/xubuntu-vnc-firefox][accetto-docker-xubuntu-vnc-firefox] based on [accetto/xubuntu-vnc][accetto-docker-xubuntu-vnc] - a streamlined and simplified image with a growing family of derived application images.
 
 ***
 
