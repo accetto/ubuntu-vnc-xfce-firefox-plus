@@ -6,6 +6,10 @@
 
 ***
 
+### Version 19.10.1
+
+- README updated
+
 ### Version 19.10
 
 - Firefox version **69.0.1**
