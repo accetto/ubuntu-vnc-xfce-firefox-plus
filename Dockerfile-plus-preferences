@@ -1,24 +1,26 @@
-# docker build -f Dockerfile-plus-preferences -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences .
-# docker build -f Dockerfile-plus-preferences -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:dev .
-# docker build -f Dockerfile-plus-preferences --build-arg BASETAG=dev -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:dev .
-# docker build -f Dockerfile-plus-preferences --build-arg ARG_VNC_USER=root:root -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:root .
-# docker build -f Dockerfile-plus-preferences --build-arg BASETAG=rolling -t accetto/ubuntu-vnc-xfce-firefox-plus-preferences:rolling .
+# ./hooks/build dev-preferences
+# ./hooks/build dfw-preferences
+# ./hooks/build nux-preferences
 
 ARG BASETAG=latest
 
 FROM accetto/ubuntu-vnc-xfce-firefox-plus:${BASETAG}
 
-LABEL \
-    any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with preferences" \
-    any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox preferences"
-
 ### Arguments can be provided during build
 ARG ARG_MOZ_FORCE_DISABLE_E10S
 ARG ARG_REFRESHED_AT
+ARG ARG_VCS_REF
 ARG ARG_VERSION_STICKER
 ARG ARG_VNC_BLACKLIST_THRESHOLD
 ARG ARG_VNC_BLACKLIST_TIMEOUT
 ARG ARG_VNC_RESOLUTION
+
+LABEL \
+  any.accetto.description="Headless Ubuntu VNC/noVNC container with Xfce desktop and Firefox with preferences" \
+  any.accetto.display-name="Headless Ubuntu/Xfce VNC/noVNC container with Firefox preferences" \
+  version-sticker="${ARG_VERSION_STICKER}" \
+  org.label-schema.vcs-ref="${ARG_VCS_REF}" \
+  org.label-schema.vcs-url="https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus"
 
 ENV \
   MOZ_FORCE_DISABLE_E10S=${ARG_MOZ_FORCE_DISABLE_E10S:+1} \
