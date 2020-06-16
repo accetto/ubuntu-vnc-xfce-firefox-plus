@@ -73,6 +73,8 @@ The image is regularly maintained and rebuilt. The history of notable changes is
     ![badge-VERSION_STICKER_LATEST][badge-VERSION_STICKER_LATEST]
     ![badge-github-commit-latest][badge-github-commit-latest]
 
+  - //TODO: `singleprocess` based on `accetto/ubuntu-vnc-xfce:latest`
+
 - **accetto/ubuntu-vnc-xfce-firefox-plus-preferences**
 
     This image is not actually contained in the [Docker repository][accetto-docker], because it is intended to keep pre-configured user-specific **Firefox preferences**. Users can put their favorite preferences into the configuration files and build the image using the provided [Dockerfile-plus-preferences][this-dockerfile-plus-preferences]. The [HOWTO][this-wiki-howto] page in [Wiki][this-wiki] describes it in more details.
@@ -126,7 +128,7 @@ If it is called with the argument `-V` (upper case `v`), then it prints out verb
 
 Examples can be found in [Wiki][this-wiki].
 
-## Firefox multi-process
+## TODO: Firefox multi-process
 
 Firefox multi-process (also known as **Electrolysis** or just **E10S**) causes in Docker container heavy crashing (**Gah. Your tab just crashed.**) and therefore it needs to be disabled.
 
@@ -358,6 +360,6 @@ Credit goes to all the countless people and companies who contribute to open sou
 
 <!-- latest tag badges -->
 
-[badge-VERSION_STICKER_LATEST]: https://badgen.net/badge/version%20sticker/ubuntu18.04.4-firefox76.0.1/blue
+[badge-VERSION_STICKER_LATEST]: https://badgen.net/badge/version%20sticker/ubuntu18.04.4-firefox77.0.1/blue
 
 [badge-github-commit-latest]: https://images.microbadger.com/badges/commit/accetto/ubuntu-vnc-xfce-firefox-plus.svg
