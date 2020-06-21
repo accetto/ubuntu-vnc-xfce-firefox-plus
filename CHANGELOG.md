@@ -6,6 +6,27 @@
 
 ***
 
+### Release 20.06.2
+
+- Firefox **77.0.1**
+  - **IMPORTANT**: Firefox multi-process mode is default now and therefore larger shared memory (`/dev/shm`) is required (see bellow)
+    - environment variable **MOZ_FORCE_DISABLE_E10S** is not set by default any more
+    - **containers with Firefox require larger shared memory** (`/dev/shm`) to run reliably
+      - at least **256MB** is recommended (default is just 64MB)
+      - use `docker run --shm-size=256m`
+        - or `shm_size: 256m` at service level in docker-compose files
+        - see [Firefox multi-process][that-wiki-firefox-multiprocess] in Wiki for description and instructions
+    - this fixes the [issue #7 (Firefox 77.0.1 scrambles pages)](https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues/7)
+    - Internet browsing should be **sand-boxed** now
+    - tag `singleprocess` introduced
+      - which is single-threaded, but
+      - please be aware that in **this** release (still Firefox **77.0.1**) webpages still will be scrambled (issue #7)
+      - it should be fixed by Mozilla in the next Firefox release
+- Other changes:
+  - default VNC resolution changed to 1360x768
+  - added some help comments into Dockerfile
+  - README updated
+
 ### Release 20.06.1
 
 - Quick mitigation of issue [#7 (Firefox 77.0.1 scrambles pages)](https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/issues/7)
@@ -260,8 +281,10 @@
 
 [this-docker]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-plus/
 [this-github]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus
-[this-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki
 [this-base]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce
+[this-wiki]: https://github.com/accetto/ubuntu-vnc-xfce-firefox-plus/wiki
+
+[that-wiki-firefox-multiprocess]: https://github.com/accetto/xubuntu-vnc/wiki/Firefox-multiprocess
 
 [accetto-github-ubuntu-vnc-xfce]: https://github.com/accetto/ubuntu-vnc-xfce
 [accetto-github-ubuntu-vnc-xfce-firefox]: https://github.com/accetto/ubuntu-vnc-xfce-firefox

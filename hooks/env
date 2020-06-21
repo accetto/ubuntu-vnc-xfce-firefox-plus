@@ -11,7 +11,7 @@ BASETAG=""
 TODAY=$(date +%Y-%m-%d)
 
 ### Warning! The values must be explicit strings (used by utils).
-VERSION_STICKER_LATEST="ubuntu18.04.4-firefox76.0.1"
+VERSION_STICKER_LATEST="ubuntu18.04.4-firefox77.0.1"
 
 VERSION_STICKER="${VERSION_STICKER_LATEST}"
 
@@ -19,20 +19,36 @@ case "${DOCKER_TAG}" in
 
     latest)
         BASETAG="latest"
-        IS_SINGLEPROCESS_BUILD=yes
         ;;
 
     dev | dev-preferences | dev-profile)
         BASETAG="dev"
-        IS_SINGLEPROCESS_BUILD=yes
         ;;
 
     dfw | dfw-preferences | dfw-profile)
         BASETAG="dfw"
-        IS_SINGLEPROCESS_BUILD=yes
         ;;
 
     nux | nux-preferences | nux-profile)
+        BASETAG="nux"
+        ;;
+
+    singleprocess)
+        BASETAG="latest"
+        IS_SINGLEPROCESS_BUILD=yes
+        ;;
+
+    dev-singleprocess)
+        BASETAG="dev"
+        IS_SINGLEPROCESS_BUILD=yes
+        ;;
+
+    dfw-singleprocess)
+        BASETAG="dfw"
+        IS_SINGLEPROCESS_BUILD=yes
+        ;;
+
+    nux-singleprocess)
         BASETAG="nux"
         IS_SINGLEPROCESS_BUILD=yes
         ;;
