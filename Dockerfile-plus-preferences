@@ -1,6 +1,18 @@
 # ./hooks/build dev-preferences
-# ./hooks/build dfw-preferences
-# ./hooks/build nux-preferences
+# ./hooks/test dev-preferences
+
+### Example: Build and test 'dev' tag locally like
+### ./hooks/build dev-preferences
+### ./hooks/test dev-preferences
+### or with additional arguments
+### ./hooks/build dev-preferences --no-cache
+### ./hooks/test dev-preferences
+### or using the utility
+### ./utils/util-hdx.sh Dockerfile 3
+### ./utils/util-hdx.sh Dockerfile 4
+### The last output line should be '+ exit 0'
+### If '+ exit 1' then adjust the version sticker
+### variables in script './hooks/env'
 
 ARG BASETAG=latest
 

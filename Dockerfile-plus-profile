@@ -1,6 +1,18 @@
 # ./hooks/build dev-profile
-# ./hooks/build dfw-profile
-# ./hooks/build nux-profile
+# ./hooks/test dev-profile
+
+### Example: Build and test 'dev' tag locally like
+### ./hooks/build dev-profile
+### ./hooks/test dev-profile
+### or with additional arguments
+### ./hooks/build dev-profile --no-cache
+### ./hooks/test dev-profile
+### or using the utility
+### ./utils/util-hdx.sh Dockerfile 3
+### ./utils/util-hdx.sh Dockerfile 4
+### The last output line should be '+ exit 0'
+### If '+ exit 1' then adjust the version sticker
+### variables in script './hooks/env'
 
 ARG BASETAG=latest
 
