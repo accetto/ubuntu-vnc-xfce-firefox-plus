@@ -6,6 +6,10 @@
 
 ***
 
+### Release 22.01
+
+- Firefox **96.0**
+
 ### Release 21.12.1
 
 - Firefox **95.0.1**
